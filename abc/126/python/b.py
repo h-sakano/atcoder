@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def canMonth(value):
     return 1 <= value and value <= 12
 
