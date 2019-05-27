@@ -13,12 +13,6 @@ for i in range(qn):
         ans += q[2]
         a = q[1]
 
-        if len(low) >= 1:
-            if a < -low[0]:
-                ans += -low[0] - a
-            elif a > high[0]:
-                ans += a - high[0]
-
         # lowは降順に並べたいので-aを入れる
         heappush(low, -a)
         heappush(high, a)
@@ -28,6 +22,7 @@ for i in range(qn):
             # lowとhighで正負が逆なので注意する
             heappush(low, -high0)
             heappush(high, -low0)
+            ans += - low0 - high0
 
     elif q[0] == 2:
         print(-low[0], ans)
