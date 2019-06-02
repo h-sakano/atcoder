@@ -13,9 +13,8 @@ def replace(s, count):
         matches = re.finditer('ABC', s)
         max_count = count
         for m in matches:
-            m.span()
-            max_count = max(max_count, replace(
-                s[:m.span()[0]] + 'BCA' + s[m.span()[1]:], count + 1))
+            newS = s[:m.span()[0]] + 'BCA' + s[m.span()[1]:]
+            max_count = max(max_count, replace(newS, count + 1))
         counts[s] = max_count
         return counts[s]
 
