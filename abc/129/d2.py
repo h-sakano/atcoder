@@ -1,17 +1,10 @@
 import numpy as np
 
 h, w = map(int, input().split())
-grid = [[False for j in range(w)] for i in range(h)]
-
+grid = []
 for i in range(h):
-    s = input()
-    for j in range(w):
-        if s[j] == '.':
-            grid[i][j] = 1
-        else:
-            grid[i][j] = 0
-
-grid = np.array(grid)
+    grid.append(list(input()))
+grid = (np.array(grid) == ".") * 1
 
 L = np.zeros((h, w), dtype=int)
 R = np.zeros((h, w), dtype=int)
