@@ -26,20 +26,5 @@ def power_func(a, b, p):
         return (a*power_func(a, b-1, p)) % p
 
 
-memo = [[-1 for _ in range(K + 1)] for _ in range(K + 1)]
-
-
-def dp(n, k):
-    # n個のボールをk個のグループに分ける(空のグループを許容)
-    if n <= 0 or k <= 1:
-        return 1
-    if memo[n][k] >= 0:
-        return memo[n][k]
-    memo[n][k] = 0
-    for i in range(n, -1, -1):
-        memo[n][k] += dp(n - i, k - 1) % MOD
-    return memo[n][k]
-
-
 for i in range(1, K + 1):
-    print(comb(N - K + 1, i, MOD) * dp(K - i, i) % MOD)
+    print(comb(N - K + 1, i, MOD) * comb(K - 1, i - 1, MOD) % MOD)
