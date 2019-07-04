@@ -16,7 +16,8 @@ ans = ""
 matchsticks = N
 while(dights > 0):
     for a in A:
-        if matchsticks - NUM[a - 1] >= 0 and dp[matchsticks - NUM[a - 1]] == dights - 1:
+        if (matchsticks - NUM[a - 1] >= 0 and
+                dp[matchsticks - NUM[a - 1]] == dights - 1):
             ans += str(a)
             dights -= 1
             matchsticks -= NUM[a - 1]
