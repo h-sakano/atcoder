@@ -14,7 +14,6 @@ for i in range(1, sumA + 1):
 
 divisors.sort(reverse=True)
 
-ans = 0
 for d in divisors:
     costs = [a % d for a in A]
     costs.sort(reverse=True)

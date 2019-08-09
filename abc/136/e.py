@@ -14,7 +14,6 @@ for i in range(1, sumA + 1):
 
 divisors.sort(reverse=True)
 
-ans = 0
 for d in divisors:
     # 一旦全部マイナス方向に調整することにしたら総和はXの倍数になる
     # どれか一つ符号を逆転すると総和がx減るので、総和/d番目が境目になる
@@ -26,7 +25,7 @@ for d in divisors:
     # よって、最初全部マイナス方向に調整したときのコストの総和7を7で割ったところが境目
     # プラス方向にはcostが大きい方から変更したい(調整の量が少なくてすむ)ので、最初にソートしておく
     costs = [a % d for a in A]
-    costs.sort()
-    if sum(costs[:N - sum(costs) // d]) <= K:
+    costs.sort(reverse=True)
+    if sum(costs[sum(costs) // d:]) <= K:
         print(d)
         break
