@@ -1,5 +1,3 @@
-use proconio::{fastout, input};
-
 pub struct UnionFind {
     pub parent: Vec<usize>,
     pub rank: Vec<usize>,
@@ -47,27 +45,29 @@ impl UnionFind {
     }
 }
 
-#[fastout]
-fn main() {
-    input! {
-        n: usize,
-        m: usize,
-        friends: [(usize, usize); m],
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_constructor() {
+        let mut uf = UnionFind::new(5);
+        assert_eq!(uf.find(0), 0);
+        assert_eq!(uf.find(1), 1);
+        assert_eq!(uf.find(2), 2);
+        assert_eq!(uf.find(3), 3);
+        assert_eq!(uf.find(4), 4);
     }
 
-    let mut uf = UnionFind::new(n);
-    for (a, b) in friends {
-        let a = a - 1;
-        let b = b - 1;
-        uf.unite(a, b);
+    #[test]
+    fn test_unite() {
+        let mut uf = UnionFind::new(5);
+        uf.unite(0, 1);
+        assert_eq!(uf.find(0), 0);
+        assert_eq!(uf.find(1), 0);
+        assert_eq!(uf.find(2), 2);
+        uf.unite(1, 2);
+        assert_eq!(uf.find(2), 0);
+        assert_eq!(uf.same(0, 2), true);
     }
-
-    let mut groups = vec![0u64; n];
-    for x in 0..n {
-        let p = uf.find(x);
-        groups[p] += 1;
-    }
-
-    let ans = groups.iter().max().copied().unwrap();
-    println!("{}", ans)
 }
