@@ -1,3 +1,5 @@
+// UnionFind
+
 use proconio::{fastout, input};
 
 pub struct UnionFind {
