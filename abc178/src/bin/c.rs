@@ -1,20 +1,28 @@
 use proconio::{fastout, input};
-const MOD: i128 = 1_000_000_000 + 7;
+const MOD: u64 = 1_000_000_000 + 7;
+
+pub fn mpow(mut b: u64, mut e: u64, m: u64) -> u64 {
+    let mut result = 1;
+
+    while e > 0 {
+        if e & 1 == 1 {
+            result = result * b % m;
+        }
+        e >>= 1;
+        b = (b * b) % m;
+    }
+
+    result
+}
 
 #[fastout]
 fn main() {
     input! {
-        n: usize,
+        n: u64,
     }
 
-    let mut pow10 = 1;
-    let mut pow9 = 1;
-    let mut pow8 = 1;
-    for _ in 1..=n {
-        pow10 = pow10 * 10 % MOD;
-        pow9 = pow9 * 9 % MOD;
-        pow8 = pow8 * 8 % MOD;
-    }
-
-    println!("{}", (pow10 + 2 * (MOD - pow9) + pow8) % MOD);
+    println!(
+        "{}",
+        (mpow(10, n, MOD) + 2 * (MOD - mpow(9, n, MOD)) + mpow(8, n, MOD)) % MOD
+    );
 }
