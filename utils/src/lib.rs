@@ -1,4 +1,4 @@
 #![allow(dead_code)]
 
-mod mpow;
+mod modulo;
 mod union_find;
