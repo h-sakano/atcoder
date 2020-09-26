@@ -1,5 +1,5 @@
 use proconio::{fastout, input};
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 #[fastout]
 fn main() {
@@ -8,11 +8,7 @@ fn main() {
         s: [String; n],
     }
 
-    let mut words = HashMap::new();
+    let s: HashSet<String> = s.into_iter().collect();
 
-    for si in s {
-        words.insert(si, 1);
-    }
-
-    println!("{}", words.len());
+    println!("{}", s.len());
 }
