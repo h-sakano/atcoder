@@ -1,5 +1,4 @@
 use proconio::{fastout, input};
-use std::collections::HashMap;
 
 #[fastout]
 fn main() {
@@ -8,19 +7,17 @@ fn main() {
         a: [usize; n],
     }
 
-    let mut dict = HashMap::new();
+    let mut dict = vec![0i64; n + 1];
     for i in 0..n {
-        let count = dict.entry(a[i]).or_insert(0i64);
-        *count += 1;
+        dict[a[i]] += 1;
     }
 
-    let mut counts = 0;
-    for (_, &value) in &dict {
-        counts += (value) * (value - 1) / 2;
+    let mut sum = 0;
+    for i in 1..=n {
+        sum += (dict[i]) * (dict[i] - 1) / 2;
     }
 
     for k in 0..n {
-        let count = dict.entry(a[k]).or_insert(0i64);
-        println!("{}", counts - *count + 1);
+        println!("{}", sum - (dict[a[k]] - 1));
     }
 }
