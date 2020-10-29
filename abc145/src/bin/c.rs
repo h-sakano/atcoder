@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use proconio::{fastout, input};
 
 #[fastout]
@@ -8,17 +7,12 @@ fn main() {
         edges: [(f64, f64); n],
     }
 
-    let mut fact = 1;
-    for i in 2..=n {
-        fact *= i;
-    }
     let mut length = 0.0;
-    for (_, v) in (1..=n as usize).permutations(n).enumerate() {
-        for j in 1..n {
-            length += ((edges[v[j] - 1].0 - edges[v[j - 1] - 1].0).powf(2f64)
-                + (edges[v[j] - 1].1 - edges[v[j - 1] - 1].1).powf(2f64))
-            .sqrt();
+    for i in 0..n - 1 {
+        for j in i + 1..n {
+            length += ((edges[i].0 - edges[j].0).powf(2f64) + (edges[i].1 - edges[j].1).powf(2f64))
+                .sqrt();
         }
     }
-    println!("{}", length / fact as f64);
+    println!("{}", 2f64 * length / n as f64);
 }
