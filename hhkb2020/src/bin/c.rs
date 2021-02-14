@@ -7,20 +7,18 @@ fn main() {
         p: [usize; n],
     }
 
-    let mut candidates = vec![];
-    for i in 0..=200_000 {
-        candidates.push(i);
-    }
+    let mut ans = 0;
+    let mut history = vec![false; 200_001];
     for i in 0..n {
-        let index = match candidates.binary_search(&p[i]) {
-            Ok(x) => x as i64,
-            Err(_) => -1,
-        };
-
-        if index >= 0 {
-            candidates.remove(index as usize);
+        history[p[i]] = true;
+        if ans == p[i] {
+            for j in ans + 1..=200_000 {
+                if !history[j] {
+                    ans = j;
+                    break;
+                }
+            }
         }
-
-        println!("{}", candidates[0]);
+        println!("{}", ans);
     }
 }
