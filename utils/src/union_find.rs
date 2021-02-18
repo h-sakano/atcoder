@@ -1,26 +1,28 @@
 pub struct UnionFind {
-    pub parent: Vec<usize>,
+    pub n: usize,
+    pub parents: Vec<usize>,
     pub rank: Vec<usize>,
 }
 
 impl UnionFind {
     pub fn new(n: usize) -> UnionFind {
-        let mut parent = vec![];
+        let mut parents = vec![];
         for x in 0..n {
-            parent.push(x);
+            parents.push(x);
         }
         UnionFind {
-            parent: parent,
+            n: n,
+            parents: parents,
             rank: vec![0; n],
         }
     }
 
     pub fn find(&mut self, x: usize) -> usize {
-        if self.parent[x] == x {
+        if self.parents[x] == x {
             x
         } else {
-            self.parent[x] = self.find(self.parent[x]);
-            self.parent[x]
+            self.parents[x] = self.find(self.parents[x]);
+            self.parents[x]
         }
     }
 
@@ -31,9 +33,9 @@ impl UnionFind {
             return;
         }
         if self.rank[x] < self.rank[y] {
-            self.parent[x] = y;
+            self.parents[x] = y;
         } else {
-            self.parent[y] = x;
+            self.parents[y] = x;
             if self.rank[x] == self.rank[y] {
                 self.rank[x] += 1;
             }
